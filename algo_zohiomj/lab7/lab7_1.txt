@@ -1,0 +1,22 @@
+#py
+def fractional_knapsack(values, weights, capacity):
+    items = [(values[i] / weights[i], values[i], weights[i]) for i in range(len(values))]
+    items.sort(reverse=True, key=lambda x: x[0])
+
+    total_value = 0  
+    for ratio, value, weight in items:
+        if capacity >= weight:
+            total_value += value
+            capacity -= weight
+        else:
+            total_value += value * (capacity / weight)
+            break
+
+    return total_value
+
+values = [60, 100, 120]
+weights = [10, 20, 30]
+capacity = 50
+
+max_value = fractional_knapsack(values, weights, capacity)
+print(f"Үүргэвчинд авах боломжит хамгийн их үнэ: {max_value}")
